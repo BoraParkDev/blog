@@ -13,13 +13,17 @@ ini_set('display_errors', 'Off');
 /**
  * Database(MySQLi)
  */
-$GLOBALS['DB_CONNECTION']=mysqli_connect('#','#','#', '#') || exit;
+$GLOBALS['DB_CONNECTION'] = mysqli_connect('#', '#', '#', '#');
+
 register_shutdown_function(function () {
     if (array_key_exists('DB_CONNECTION', $GLOBALS) && $GLOBALS['DB_CONNECTION']) {
         mysqli_close($GLOBALS['DB_CONNECTION']);
     }
 });
 
+if (!$GLOBALS['DB_CONNECTION']) {
+    exit;
+}
 /**
  * Session
  */
